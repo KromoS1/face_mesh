@@ -1,23 +1,19 @@
 import { useEffect, useRef } from "react";
 
 import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
-import * as faceMesh from "@mediapipe/face_mesh";
-import "@tensorflow/tfjs-core";
-// Register WebGL backend.
-import "@tensorflow/tfjs-backend-webgl";
+import "@mediapipe/face_mesh";
 
 import Webcam from "react-webcam";
 
-const App = () => {
+export const App1 = () => {
   const webcam = useRef<Webcam>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
 
   const runDetection = async () => {
     const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
     const detectorConfig = {
-      runtime: "mediapipe", // or 'tfjs'
-      solutionPath: `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@${faceMesh.VERSION}`,
-      maxFaces: 1,
+      runtime: 'mediapipe', 
+      solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh',
     } as any;
     // create detector
     const detector = await faceLandmarksDetection.createDetector(model, detectorConfig);
@@ -100,6 +96,7 @@ const App = () => {
           top: 50,
           left: 0,
           right: 0,
+          right: 0,
         }}
       />
       <canvas
@@ -116,5 +113,3 @@ const App = () => {
     </div>
   );
 };
-
-export default App;
